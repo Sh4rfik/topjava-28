@@ -2,8 +2,8 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.repository.MealInMemoryCrud;
-import ru.javawebinar.topjava.repository.MealInMemoryRepository;
+import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.repository.InMemoryMealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.ServletConfig;
@@ -23,14 +23,14 @@ public class MealServlet extends HttpServlet {
 
     private static final Logger log = getLogger(UserServlet.class);
 
-    private final int caloriesPerDay = 2000;
+    private static final int CALORIES_PER_DAY = 2000;
 
-    private MealInMemoryCrud repository;
+    private MealRepository repository;
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-        super.init();
-        repository = new MealInMemoryRepository();
+        super.init(servletConfig);
+        repository = new InMemoryMealRepository();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -73,7 +73,7 @@ public class MealServlet extends HttpServlet {
                 request.setAttribute("mealList", MealsUtil.filteredByStreams(new ArrayList<>(repository.getAll()),
                         LocalTime.MIN,
                         LocalTime.MAX,
-                        caloriesPerDay));
+                        CALORIES_PER_DAY));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 log.debug("Redirect to meals");
         }

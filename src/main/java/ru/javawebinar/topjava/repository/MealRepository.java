@@ -4,7 +4,7 @@ import ru.javawebinar.topjava.model.Meal;
 
 import java.util.Collection;
 
-public interface MealInMemoryCrud {
+public interface MealRepository {
 
     Meal save(Meal meal);
 

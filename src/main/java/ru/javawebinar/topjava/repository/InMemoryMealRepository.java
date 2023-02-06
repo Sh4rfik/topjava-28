@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MealInMemoryRepository implements MealInMemoryCrud {
+public class InMemoryMealRepository implements MealRepository {
 
     private final Map<Integer, Meal> meals = new ConcurrentHashMap<>();
 
