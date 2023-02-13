@@ -31,7 +31,7 @@ public class MealService {
         return checkNotFoundWithId(repository.get(userId, mealId), mealId);
     }
 
-    public Collection<Meal> getAll(int userId) {
+    public List<Meal> getAll(int userId) {
         return repository.getAll(userId);
     }
 
@@ -39,7 +39,7 @@ public class MealService {
         checkNotFoundWithId(repository.save(userId, meal), meal.getId());
     }
 
-    public List<Meal> getFilteredByDate(int id, LocalDate startDate, LocalDate endDate) {
-        return repository.getFilteredByDate(id, startDate, endDate);
+    public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
+        return repository.getFilteredByDate(userId, startDate, endDate);
     }
 }

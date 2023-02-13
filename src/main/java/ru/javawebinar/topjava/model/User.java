@@ -16,7 +16,7 @@ public class User extends AbstractNamedEntity {
 
     private Date registered = new Date();
 
-    private Set<ru.javawebinar.topjava.model.Role> roles;
+    private Set<Role> roles;
 
     private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
 

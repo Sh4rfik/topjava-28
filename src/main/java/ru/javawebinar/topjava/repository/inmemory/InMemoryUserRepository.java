@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,10 +22,9 @@ public class InMemoryUserRepository implements UserRepository {
     private final AtomicInteger counter = new AtomicInteger(0);
 
     @Override
-    public boolean delete(int id) {
-        log.info("delete {}", id);
-        repository.remove(id);
-        return true;
+    public boolean delete(int userId) {
+        log.info("delete {}", userId);
+        return repository.remove(userId, get(userId));
     }
 
     @Override
@@ -33,9 +33,9 @@ public class InMemoryUserRepository implements UserRepository {
         if (user.isNew()) {
             user.setId(counter.incrementAndGet());
             repository.put(user.getId(), user);
+            return user;
         }
-        repository.computeIfPresent(user.getId(), (id, olduser) -> user);
-        return user;
+        return repository.computeIfPresent(user.getId(), (id, oldUser) -> user);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public List<User> getAll() {
         log.info("getAll");
-        return repository.values().stream().sorted().collect(Collectors.toList());
+        return new ArrayList<>(repository.values());
     }
 
     @Override
@@ -57,6 +57,6 @@ public class InMemoryUserRepository implements UserRepository {
                 .stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 }

@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web.meal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
@@ -18,9 +19,10 @@ import static ru.javawebinar.topjava.web.SecurityUtil.authUserCaloriesPerDay;
 import static ru.javawebinar.topjava.web.SecurityUtil.getAuthUserId;
 
 @Controller
-public class MealRestController extends AbstractMealController {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+public class MealRestController {
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
+    @Autowired
     private final MealService service;
 
     public MealRestController(MealService service) {
@@ -33,10 +35,9 @@ public class MealRestController extends AbstractMealController {
         return service.create(getAuthUserId(), meal);
     }
 
-    public void update(Meal meal) {
-        int id = meal.getId();
-        log.info("update meal {} with id={}", meal, id);
-        assureIdConsistent(meal, id);
+    public void update(Meal meal, int mealId) {
+        log.info("update meal with id = {}", mealId);
+        assureIdConsistent(meal, mealId);
         service.update(getAuthUserId(), meal);
     }
 
@@ -45,9 +46,9 @@ public class MealRestController extends AbstractMealController {
         service.delete(getAuthUserId(), id);
     }
 
-    public Meal get(int id) {
-        log.info("get {}", id);
-        return service.get(getAuthUserId(), id);
+    public Meal get(int mealId) {
+        log.info("get {}", mealId);
+        return service.get(getAuthUserId(), mealId);
     }
 
     public List<MealTo> getAll() {
@@ -55,15 +56,12 @@ public class MealRestController extends AbstractMealController {
         return MealsUtil.getTos(service.getAll(getAuthUserId()), authUserCaloriesPerDay());
     }
 
-    public List<MealTo> getFilteredByDate(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
-        log.info("get all filtered for UserId={}", getAuthUserId());
+    public List<MealTo> getFilteredByDateAndTime(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+        log.info("get all filtered for UserId = {}", getAuthUserId());
         LocalDate sd = startDate == null ? LocalDate.MIN : startDate;
         LocalDate ed = endDate == null ? LocalDate.MAX : endDate;
         LocalTime st = startTime == null ? LocalTime.MIN : startTime;
         LocalTime et = endTime == null ? LocalTime.MAX : endTime;
-        return MealsUtil.getFilteredTos(service.getFilteredByDate(getAuthUserId(),
-                        sd,
-                        ed),
-                authUserCaloriesPerDay(), st, et);
+        return MealsUtil.getFilteredTos(service.getFilteredByDate(getAuthUserId(), sd, ed), authUserCaloriesPerDay(), st, et);
     }
 }

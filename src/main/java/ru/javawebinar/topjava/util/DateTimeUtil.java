@@ -29,40 +29,14 @@ public class DateTimeUtil {
         return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
     }
 
-    @Nullable
-    public static LocalDate parseLocalDateMin(@Nullable String str) {
-        if (!StringUtils.hasLength(str)) {
-            return null;
-        } else {
-            return LocalDate.parse(str);
-        }
+    public static @Nullable
+    LocalDate parseLocalDate(@Nullable String str) {
+        return StringUtils.hasLength(str) ? LocalDate.parse(str) : null;
     }
 
-    @Nullable
-    public static LocalDate parseLocalDateMax(@Nullable String str) {
-        if (!StringUtils.hasLength(str)) {
-            return null;
-        } else {
-            return LocalDate.parse(str);
-        }
-    }
-
-    @Nullable
-    public static LocalTime parseLocalTimeMin(@Nullable String str) {
-        if (!StringUtils.hasLength(str)) {
-            return null;
-        } else {
-            return LocalTime.parse(str);
-        }
-    }
-
-    @Nullable
-    public static LocalTime parseLocalTimeMax(@Nullable String str) {
-        if (!StringUtils.hasLength(str)) {
-            return null;
-        } else {
-            return LocalTime.parse(str);
-        }
+    public static @Nullable
+    LocalTime parseLocalTime(@Nullable String str) {
+        return StringUtils.hasLength(str) ? LocalTime.parse(str) : null;
     }
 }
 

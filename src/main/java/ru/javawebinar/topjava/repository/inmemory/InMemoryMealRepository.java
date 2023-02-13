@@ -20,8 +20,10 @@ public class InMemoryMealRepository implements MealRepository {
     private final AtomicInteger counter = new AtomicInteger(0);
 
     {
-        MealsUtil.meals.forEach(meal -> save(1, meal));
+        MealsUtil.ADMIN_MEALS.forEach(meal -> save(1, meal));
+        MealsUtil.USER_MEALS.forEach(meal -> save(2, meal));
     }
+
 
     @Override
     public Meal save(int userId, Meal meal) {
@@ -32,7 +34,7 @@ public class InMemoryMealRepository implements MealRepository {
             return meal;
         }
         // handle case: update, but not present in storage
-        repository.computeIfPresent(userId, (id, oldMeal) -> mealMap);
+        mealMap.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
         return meal;
     }
 
@@ -47,8 +49,13 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public Collection<Meal> getAll(int userId) {
+    public List<Meal> getAll(int userId) {
         return filterByPredicate(userId, meal -> true);
+    }
+
+    @Override
+    public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
+        return filterByPredicate(userId, meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDate(), startDate, endDate));
     }
 
     private List<Meal> filterByPredicate(int userId, Predicate<Meal> filter) {
@@ -58,10 +65,6 @@ public class InMemoryMealRepository implements MealRepository {
                         .filter(filter)
                         .sorted(Comparator.comparing(Meal::getDateTime).reversed())
                         .collect(Collectors.toList());
-    }
-
-    public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
-        return filterByPredicate(userId, meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDate(), startDate, endDate));
     }
 }
 
