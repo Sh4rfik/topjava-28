@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static ru.javawebinar.topjava.web.SecurityUtil.*;
+import static ru.javawebinar.topjava.web.SecurityUtil.getAuthUserId;
+import static ru.javawebinar.topjava.web.SecurityUtil.setAuthUserId;
 
 public class UserServlet extends HttpServlet {
     private static final Logger log = getLogger(UserServlet.class);

@@ -8,7 +8,10 @@ import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
@@ -40,12 +43,14 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public boolean delete(int userId, int mealId) {
-        return repository.get(userId).remove(mealId) != null;
+        Map<Integer, Meal> meals = repository.get(userId);
+        return meals != null && meals.remove(mealId) != null;
     }
 
     @Override
     public Meal get(int userId, int mealId) {
-        return repository.get(userId).get(mealId);
+        Map<Integer, Meal> meals = repository.get(userId);
+        return meals == null ? null : meals.get(mealId);
     }
 
     @Override
