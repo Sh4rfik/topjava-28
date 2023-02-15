@@ -23,10 +23,9 @@ public class InMemoryMealRepository implements MealRepository {
     private final AtomicInteger counter = new AtomicInteger(0);
 
     {
-        MealsUtil.ADMIN_MEALS.forEach(meal -> save(1, meal));
-        MealsUtil.USER_MEALS.forEach(meal -> save(2, meal));
+        MealsUtil.adminMeals.forEach(meal -> save(1, meal));
+        MealsUtil.userMeals.forEach(meal -> save(2, meal));
     }
-
 
     @Override
     public Meal save(int userId, Meal meal) {
@@ -60,7 +59,7 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
-        return filterByPredicate(userId, meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDate(), startDate, endDate));
+        return filterByPredicate(userId, meal -> DateTimeUtil.isBetweenDatesInclusive(meal.getDate(), startDate, endDate));
     }
 
     private List<Meal> filterByPredicate(int userId, Predicate<Meal> filter) {

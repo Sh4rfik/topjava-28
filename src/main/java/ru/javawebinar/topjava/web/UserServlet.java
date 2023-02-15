@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,11 +23,11 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String userId = req.getParameter("user");
-        if (userId != null && !userId.isEmpty()) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String userId = request.getParameter("user");
+        if (StringUtils.hasLength(userId)) {
             setAuthUserId(Integer.parseInt(userId));
-            resp.sendRedirect("meals");
+            response.sendRedirect("meals");
             log.info("Authorization user with id = {}", getAuthUserId());
         } else {
             log.info("Incorrect userId parameter");

@@ -49,15 +49,15 @@ public class MealServlet extends HttpServlet {
                 request.getParameter("description"),
                 Integer.parseInt(request.getParameter("calories")));
 
-        int id;
+        int mealId;
         if (StringUtils.hasLength(request.getParameter("id"))) {
-            id = getId(request);
-            mealRestController.update(meal, id);
-            log.info("Update meal with id = {}", id);
+            mealId = getId(request);
+            mealRestController.update(meal, mealId);
+            log.info("Update meal with id = {}", mealId);
         } else {
             mealRestController.create(meal);
-            id = meal.getId();
-            log.info("Update meal with id = {}", id);
+            mealId = meal.getId();
+            log.info("Create meal with id = {}", mealId);
         }
         response.sendRedirect("meals");
     }

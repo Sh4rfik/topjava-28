@@ -20,11 +20,11 @@ public class User extends AbstractNamedEntity {
 
     private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
 
-    public User(Integer id, String name, String email, String password, ru.javawebinar.topjava.model.Role... roles) {
+    public User(Integer id, String name, String email, String password, Role... roles) {
         this(id, name, email, password, DEFAULT_CALORIES_PER_DAY, true, Arrays.asList(roles));
     }
 
-    public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Collection<ru.javawebinar.topjava.model.Role> roles) {
+    public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Collection<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;
@@ -69,11 +69,11 @@ public class User extends AbstractNamedEntity {
         return enabled;
     }
 
-    public Set<ru.javawebinar.topjava.model.Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<ru.javawebinar.topjava.model.Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 

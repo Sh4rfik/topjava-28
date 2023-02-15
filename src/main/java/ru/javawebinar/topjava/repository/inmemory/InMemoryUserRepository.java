@@ -6,11 +6,12 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryUserRepository implements UserRepository {
@@ -23,7 +24,7 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public boolean delete(int userId) {
         log.info("delete {}", userId);
-        return repository.remove(userId, get(userId));
+        return repository.remove(userId) != null;
     }
 
     @Override
@@ -38,15 +39,17 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User get(int id) {
-        log.info("get {}", id);
-        return repository.get(id);
+    public User get(int userId) {
+        log.info("get {}", userId);
+        return repository.get(userId);
     }
 
     @Override
     public List<User> getAll() {
         log.info("getAll");
-        return new ArrayList<>(repository.values());
+        return repository.values().stream()
+                .sorted(Comparator.comparing(User::getName).thenComparing(User::getEmail))
+                .collect(Collectors.toList());
     }
 
     @Override
