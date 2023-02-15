@@ -22,12 +22,12 @@ public class UserService {
         return repository.save(user);
     }
 
-    public void delete(int id) {
-        checkNotFoundWithId(repository.delete(id), id);
+    public void delete(int userId) {
+        checkNotFoundWithId(repository.delete(userId), userId);
     }
 
-    public User get(int id) {
-        return checkNotFoundWithId(repository.get(id), id);
+    public User get(int userId) {
+        return checkNotFoundWithId(repository.get(userId), userId);
     }
 
     public User getByEmail(String email) {

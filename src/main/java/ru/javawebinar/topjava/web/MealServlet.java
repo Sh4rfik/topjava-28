@@ -55,7 +55,7 @@ public class MealServlet extends HttpServlet {
             mealRestController.update(meal, mealId);
             log.info("Update meal with id = {}", mealId);
         } else {
-            mealRestController.create(meal);
+            meal = mealRestController.create(meal);
             mealId = meal.getId();
             log.info("Create meal with id = {}", mealId);
         }
