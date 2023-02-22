@@ -96,12 +96,12 @@ public class MealServiceTest {
 
     @Test
     public void getNotOwn() {
-        assertThrows(NotFoundException.class, () -> mealService.get(NOT_FOUND, USER_ID));
+        assertThrows(NotFoundException.class, () -> mealService.get(adminMeal1.getId(), USER_ID));
     }
 
     @Test
     public void updateNotOwn() {
-        assertThrows(NotFoundException.class, () -> mealService.update(userMeal1, ADMIN_ID));
+        assertThrows(NotFoundException.class, () -> mealService.update(getUpdatedMeal(), ADMIN_ID));
     }
 
     @Test

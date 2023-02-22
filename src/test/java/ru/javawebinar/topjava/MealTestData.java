@@ -18,23 +18,17 @@ public class MealTestData {
 
     public static final Meal adminMeal1 = new Meal(ADMIN_MEAL_ID + 1, LocalDateTime.of(2023, Month.FEBRUARY, 20, 18, 30), "Dinner", 600);
 
-    public static final Meal adminMeal2 = new Meal
-            (ADMIN_MEAL_ID, LocalDateTime.of(2023, Month.FEBRUARY, 20, 12, 45), "Lunch", 500);
+    public static final Meal adminMeal2 = new Meal(ADMIN_MEAL_ID, LocalDateTime.of(2023, Month.FEBRUARY, 20, 12, 45), "Lunch", 500);
 
-    public static final Meal adminMeal3 = new Meal
-            (ADMIN_MEAL_ID + 2, LocalDateTime.of(2023, Month.FEBRUARY, 20, 8, 35), "Breakfast", 900);
+    public static final Meal adminMeal3 = new Meal(ADMIN_MEAL_ID + 2, LocalDateTime.of(2023, Month.FEBRUARY, 20, 8, 35), "Breakfast", 900);
 
-    public static final Meal adminMeal4 = new Meal
-            (ADMIN_MEAL_ID + 3, LocalDateTime.of(2023, Month.FEBRUARY, 22, 8, 0), "Breakfast", 600);
+    public static final Meal adminMeal4 = new Meal(ADMIN_MEAL_ID + 3, LocalDateTime.of(2023, Month.FEBRUARY, 22, 8, 0), "Breakfast", 600);
 
-    public static final Meal userMeal1 = new Meal
-            (USER_MEAL_ID, LocalDateTime.of(2023, Month.FEBRUARY, 20, 19, 54), "Dinner", 300);
+    public static final Meal userMeal1 = new Meal(USER_MEAL_ID, LocalDateTime.of(2023, Month.FEBRUARY, 20, 19, 54), "Dinner", 300);
 
-    public static final Meal userMeal2 = new Meal
-            (USER_MEAL_ID + 1, LocalDateTime.of(2023, Month.FEBRUARY, 20, 12, 0), "Lunch", 550);
+    public static final Meal userMeal2 = new Meal(USER_MEAL_ID + 1, LocalDateTime.of(2023, Month.FEBRUARY, 20, 12, 0), "Lunch", 550);
 
-    public static final Meal userMeal3 = new Meal
-            (USER_MEAL_ID + 2, LocalDateTime.of(2023, Month.FEBRUARY, 22, 19, 0), "Dinner", 650);
+    public static final Meal userMeal3 = new Meal(USER_MEAL_ID + 2, LocalDateTime.of(2023, Month.FEBRUARY, 22, 19, 0), "Dinner", 650);
 
     public static final List<Meal> adminMeals = Arrays.asList(adminMeal4, adminMeal1, adminMeal2, adminMeal3);
 
