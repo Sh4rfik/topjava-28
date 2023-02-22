@@ -16,8 +16,7 @@ public class MealTestData {
 
     public static final int ADMIN_MEAL_ID = START_SEQ + 3;
 
-    public static final Meal adminMeal1 = new Meal
-            (ADMIN_MEAL_ID + 1, LocalDateTime.of(2023, Month.FEBRUARY, 20, 18, 30), "Dinner", 600);
+    public static final Meal adminMeal1 = new Meal(ADMIN_MEAL_ID + 1, LocalDateTime.of(2023, Month.FEBRUARY, 20, 18, 30), "Dinner", 600);
 
     public static final Meal adminMeal2 = new Meal
             (ADMIN_MEAL_ID, LocalDateTime.of(2023, Month.FEBRUARY, 20, 12, 45), "Lunch", 500);
