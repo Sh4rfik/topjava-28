@@ -20,10 +20,6 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 public class MealAbstractServiceTest extends AbstractServiceTest {
 
-    private static final Logger log = getLogger("result");
-
-    private static final StringBuilder results = new StringBuilder();
-
     @Autowired
     protected MealService service;
 
